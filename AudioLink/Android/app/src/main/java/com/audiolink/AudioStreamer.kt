@@ -11,12 +11,10 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okio.ByteString
 import okio.ByteString.Companion.toByteString
-import org.concentus.OpusEncoder
-import org.concentus.OpusApplication
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-class AudioStreamer(private val useOpus: Boolean = true) {
+class AudioStreamer(private val useOpus: Boolean = false) {  // Default to PCM mode
 
     private var audioRecord: AudioRecord? = null
     private var isStreaming = false
@@ -37,9 +35,6 @@ class AudioStreamer(private val useOpus: Boolean = true) {
     private val audioFormat = AudioFormat.ENCODING_PCM_16BIT
     private val bufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat)
     private val frameSize = 960 // 20ms at 48kHz
-    
-    // Opus Encoder
-    private var opusEncoder: OpusEncoder? = null
 
     interface StreamListener {
         fun onConnectionOpened()
@@ -50,19 +45,9 @@ class AudioStreamer(private val useOpus: Boolean = true) {
     var listener: StreamListener? = null
 
     init {
-        if (useOpus) {
-            try {
-                // Initialize Opus encoder: 48kHz, 1 channel, VoIP application
-                opusEncoder = OpusEncoder(sampleRate, 1, OpusApplication.OPUS_APPLICATION_VOIP)
-                opusEncoder?.bitrate = 64000 // 64 kbps
-                opusEncoder?.complexity = 10 // Max quality
-                Log.i("AudioStreamer", "Opus encoder initialized (64kbps)")
-            } catch (e: Exception) {
-                Log.e("AudioStreamer", "Failed to initialize Opus encoder: ${e.message}")
-            }
-        } else {
-            Log.i("AudioStreamer", "Running in PCM mode (no Opus)")
-        }
+        // PCM mode only (no Opus) - matching server's --pcm mode
+        Log.i("AudioStreamer", "Running in PCM mode (no Opus compression)")
+        Log.i("AudioStreamer", "Note: This uses more bandwidth but works without Opus library")
     }
 
     @SuppressLint("MissingPermission") // Checked in Activity
@@ -120,27 +105,13 @@ class AudioStreamer(private val useOpus: Boolean = true) {
 
             Thread {
                 val pcmBuffer = ShortArray(frameSize) // 960 samples
-                val opusBuffer = ByteArray(4000) // Max Opus frame size
                 
                 while (isStreaming) {
                     val read = audioRecord?.read(pcmBuffer, 0, frameSize) ?: 0
                     if (read > 0) {
-                        if (useOpus && opusEncoder != null) {
-                            try {
-                                // Encode PCM to Opus
-                                val encodedSize = opusEncoder!!.encode(pcmBuffer, 0, frameSize, opusBuffer, 0, opusBuffer.size)
-                                if (encodedSize > 0) {
-                                    // Send Opus frame
-                                    webSocket?.send(ByteString.of(opusBuffer, 0, encodedSize))
-                                }
-                            } catch (e: Exception) {
-                                Log.e("AudioStreamer", "Opus encoding error: ${e.message}")
-                            }
-                        } else {
-                            // Send raw PCM (convert short[] to byte[])
-                            val pcmBytes = shortArrayToByteArray(pcmBuffer)
-                            webSocket?.send(ByteString.of(pcmBytes, 0, pcmBytes.size))
-                        }
+                        // Send raw PCM (convert short[] to byte[])
+                        val pcmBytes = shortArrayToByteArray(pcmBuffer)
+                        webSocket?.send(ByteString.of(pcmBytes, 0, pcmBytes.size))
                     }
                 }
             }.start()
