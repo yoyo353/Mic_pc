@@ -3,7 +3,6 @@ import websockets
 import pyaudio
 import sys
 import logging
-import opuslib
 import struct
 from JitterBuffer import JitterBuffer
 
@@ -35,10 +34,21 @@ class AudioServer:
         # Initialize Opus Decoder
         if self.use_opus:
             try:
+                import opuslib
                 self.opus_decoder = opuslib.Decoder(RATE, CHANNELS)
                 logger.info("Opus decoder initialized")
+            except ImportError:
+                logger.error("Opus library (opuslib) not installed. Please install with:")
+                logger.error("  pip install opuslib")
+                logger.error("Then install Opus library:")
+                logger.error("  conda install -c conda-forge opus")
+                logger.error("Or run in PCM mode: python server.py --pcm")
+                sys.exit(1)
             except Exception as e:
                 logger.error(f"Failed to initialize Opus decoder: {e}")
+                logger.error("This usually means the Opus DLL is not found.")
+                logger.error("Install with: conda install -c conda-forge opus")
+                logger.error("Or run in PCM mode: python server.py --pcm")
                 sys.exit(1)
         else:
             self.opus_decoder = None
