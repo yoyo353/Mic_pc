@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.audiolink.app-mergeDebugResources-29:/values-hdpi-v4/values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Rodrigo\\.gradle\\caches\\8.12\\transforms\\d5e0ffba3d1002a1fc6a067c8f700aca\\transformed\\appcompat-1.6.1\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
+                    }
+                }
+            ]
+        }
+    ]
+}
