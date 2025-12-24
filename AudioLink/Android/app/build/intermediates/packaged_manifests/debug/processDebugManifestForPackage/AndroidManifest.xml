@@ -31,7 +31,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AudioLink" >
+        android:theme="@style/Theme.AudioLink"
+        android:usesCleartextTraffic="true" >
         <activity
             android:name="com.audiolink.MainActivity"
             android:exported="true" >

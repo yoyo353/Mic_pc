@@ -111,7 +111,7 @@ class AudioStreamer(private val useOpus: Boolean = false) {  // Default to PCM m
                     if (read > 0) {
                         // Send raw PCM (convert short[] to byte[])
                         val pcmBytes = shortArrayToByteArray(pcmBuffer)
-                        webSocket?.send(ByteString.of(pcmBytes, 0, pcmBytes.size))
+                        webSocket?.send(pcmBytes.toByteString())
                     }
                 }
             }.start()
