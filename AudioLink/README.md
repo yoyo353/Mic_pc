@@ -32,20 +32,19 @@ The app captures audio from your phone's microphone, compresses it using the Opu
 
 ## ✨ Features
 
-### Current (Phase 2)
+### Phase 2 Complete (Current)
 - ✅ **Opus Compression** - 64 kbps bitrate (~90% bandwidth reduction)
 - ✅ **Low Latency** - 90-115ms end-to-end on WiFi 5GHz
 - ✅ **Adaptive JitterBuffer** - Smooth playback with network jitter compensation
-- ✅ **Real-time Statistics** - Latency monitoring and performance metrics
 - ✅ **Dual Mode** - Opus (compressed) or PCM (raw) audio
-- ✅ **Professional Quality** - 48kHz sample rate, 16-bit depth
+- ✅ **Background Streaming** - Continue streaming while app is minimized
+- ✅ **Audio Controls** - Volume slider and Mute button
+- ✅ **Easy Server Launch** - Auto-IP detection and startup script
 
 ### Upcoming (Phase 3)
 - 🔜 **USB Mode** - Ultra-low latency (30-50ms) via ADB tunnel
 - 🔜 **TLS Encryption** - Secure WebSocket connections
-- 🔜 **Foreground Service** - Background streaming on Android
 - 🔜 **Auto-reconnection** - Automatic recovery from network issues
-- 🔜 **Enhanced UI** - Real-time latency display and quality presets
 - 🔜 **Bidirectional Control** - Remote configuration from PC
 
 ---
@@ -63,21 +62,19 @@ The app captures audio from your phone's microphone, compresses it using the Opu
 
 ### 5-Minute Setup
 
-1. **Install Server (Windows)**
-   ```bash
-   cd AudioLink/Server
-   pip install -r requirements.txt
-   python server.py
-   ```
+1. **Start Server (Windows)**
+   - Go to `AudioLink/Server`
+   - Double-click **`start_server.bat`**
+   - Note the displayed IP address (e.g., `192.168.1.X`)
 
 2. **Install Client (Android)**
-   - Build in Android Studio, or
-   - Install pre-built APK from [Releases](../../releases)
+   - Install the APK from `AudioLink/Android/app/build/outputs/apk/debug/app-debug.apk`
 
 3. **Connect**
    - Enter your PC's IP in the app
    - Tap "Connect"
-   - Start talking! 🎤
+   - Use Volume/Mute controls as needed 🎤
+   - Look for the "AudioLink Active" notification when minimizing the app
 
 ---
 
@@ -102,10 +99,7 @@ pip install -r requirements.txt
 - `pyaudio` - Audio output
 - `opuslib` - Opus codec (requires Opus library)
 
-> **Note:** If Opus installation fails, you can run in PCM mode:
-> ```bash
-> python server.py --pcm
-> ```
+> **Note:** If Opus installation fails, `start_server.bat` automatically falls back to PCM mode.
 
 ### Client (Android)
 
@@ -116,7 +110,7 @@ pip install -r requirements.txt
 4. Click **Run** ▶️
 
 #### Option 2: Install APK
-1. Download APK from [Releases](../../releases)
+1. Transfer the built APK to your phone
 2. Enable "Install from Unknown Sources"
 3. Install and grant microphone permission
 
@@ -127,32 +121,30 @@ pip install -r requirements.txt
 ### Basic Usage
 
 1. **Start the server:**
-   ```bash
-   cd AudioLink/Server
-   python server.py
-   ```
+   Double-click `start_server.bat`
    
    You should see:
    ```
-   INFO - Opus decoder initialized
-   INFO - Starting WebSocket server on 0.0.0.0:8765
+   ==================================================
+    AUDIO LINK SERVER STARTED
+   ==================================================
+    Connect your phone to WiFi and enter this IP:
+   
+         192.168.1.113
+   
+    Port: 8765
+   ==================================================
    ```
 
-2. **Find your PC's IP:**
-   ```bash
-   ipconfig
-   ```
-   Look for "IPv4 Address" (e.g., `192.168.1.100`)
-
-3. **Connect from Android:**
+2. **Connect from Android:**
    - Open AudioLink app
-   - Enter PC IP address
+   - Enter the IP displayed above
    - Tap **Connect**
-   - Speak into your phone! 🎤
+   - **Background Mode:** Press Home button; streaming continues via notification.
+   - **Mute:** Use the Mute button to silence audio without disconnecting.
 
-4. **Verify audio:**
-   - You should hear yourself through PC speakers
-   - Check server logs for statistics
+3. **Verify audio:**
+   - You should hear yourself through PC speakers (unless using VB-Cable)
 
 ### Use as System Microphone
 
@@ -182,17 +174,11 @@ To use AudioLink in Discord, Zoom, OBS, etc.:
 adb reverse tcp:8765 tcp:8765
 
 # Start server
-python server.py
+double-click start_server.bat
 
 # In Android app, connect to: localhost
 ```
 **Latency:** ~30-50ms (vs 90-115ms on WiFi)
-
-#### PCM Mode (No Compression)
-```bash
-python server.py --pcm
-```
-Use this if Opus installation fails. Higher bandwidth usage.
 
 ---
 
@@ -215,8 +201,8 @@ Use this if Opus installation fails. Higher bandwidth usage.
 - **Sample Rate:** 48kHz
 - **Bit Depth:** 16-bit
 - **Channels:** Mono
-- **Codec:** Opus (64 kbps)
-- **Compression:** ~91% bandwidth reduction
+- **Codec:** Opus (64 kbps) or PCM (16-bit raw)
+- **Compression:** ~91% bandwidth reduction (Opus mode)
 - **Quality:** Comparable to mid-range USB microphones
 
 ---
@@ -240,7 +226,7 @@ Use this if Opus installation fails. Higher bandwidth usage.
 **Solutions:**
 - ✅ Verify both devices on same WiFi network
 - ✅ Check Windows Firewall allows Python on port 8765
-- ✅ Ensure server is running (`python server.py`)
+- ✅ Ensure server is running
 - ✅ Try disabling firewall temporarily to test
 
 ### Opus Installation Issues
@@ -248,17 +234,8 @@ Use this if Opus installation fails. Higher bandwidth usage.
 **Problem:** `Failed to initialize Opus decoder`
 
 **Solutions:**
-```bash
-# Option 1: Use Conda
-conda install -c conda-forge opus
-
-# Option 2: Use PCM mode (temporary)
-python server.py --pcm
-
-# Option 3: Download Opus DLL manually
-# From: https://opus-codec.org/downloads/
-# Place opus.dll in C:\Windows\System32\
-```
+- ✅ `start_server.bat` handles this automatically by switching to PCM mode.
+- ✅ To fix Opus manually: `conda install -c conda-forge opus`
 
 ### High Latency (>200ms)
 
@@ -269,10 +246,6 @@ python server.py --pcm
 - ✅ Move closer to router
 - ✅ Close bandwidth-heavy applications
 - ✅ Try USB mode for minimum latency
-- ✅ Reduce JitterBuffer in `server.py` (line 48):
-  ```python
-  self.jitter_buffer = JitterBuffer(target_buffer_ms=20, frame_duration_ms=20)
-  ```
 
 ### Audio Choppy/Stuttering
 
@@ -285,7 +258,6 @@ python server.py --pcm
   ```
 - ✅ Improve WiFi signal strength
 - ✅ Close CPU-intensive applications
-- ✅ Use WiFi 5GHz
 
 ### No Audio in Discord/Zoom
 
@@ -307,11 +279,13 @@ python server.py --pcm
 AudioLink/
 ├── Server/                 # Python server (Windows)
 │   ├── server.py          # Main WebSocket server
+│   ├── start_server.bat   # Startup script
 │   ├── JitterBuffer.py    # Adaptive jitter buffer
 │   └── requirements.txt   # Python dependencies
 ├── Android/               # Android client (Kotlin)
 │   └── app/src/main/java/com/audiolink/
-│       ├── MainActivity.kt      # UI
+│       ├── MainActivity.kt      # UI & Service binding
+│       ├── AudioService.kt      # Foreground Service
 │       └── AudioStreamer.kt     # Audio capture & streaming
 └── README.md
 ```
@@ -327,6 +301,7 @@ AudioLink/
 - `AudioRecord` - Audio capture
 - `OkHttp` - WebSocket client
 - `Concentus` - Opus encoder
+- `Foreground Service` - Background execution
 
 ### Contributing
 
@@ -351,13 +326,11 @@ Contributions are welcome! Please:
 - Latency statistics
 - Dual codec support
 
-### 🔄 Phase 3 - Advanced (In Progress)
+### ✅ Phase 3 - Enhanced (Current)
+- Background service (Android) ✔️
+- Volume and Mute controls ✔️
+- Easy server startup ✔️
 - Modular architecture
-- Foreground service (Android)
-- Auto-reconnection
-- Enhanced UI with real-time stats
-- USB mode
-- TLS encryption
 
 ### 🔜 Phase 4 - Professional
 - Desktop GUI (Windows)
