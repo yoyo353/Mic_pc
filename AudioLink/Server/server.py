@@ -193,9 +193,36 @@ class AudioServer:
 if __name__ == "__main__":
     import argparse
     
+    import socket
+    
+    def get_local_ip():
+        try:
+            # Connect to a public DNS to find the optimal local interface IP
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            ip = s.getsockname()[0]
+            s.close()
+            return ip
+        except:
+            return socket.gethostbyname(socket.gethostname())
+
     parser = argparse.ArgumentParser(description='AudioLink Server')
     parser.add_argument('--pcm', action='store_true', help='Use PCM mode instead of Opus')
     args = parser.parse_args()
+    
+    # Force PCM mode if Opus is missing, but allow override if user installed it manually?
+    # Actually, let's stick to the existing logic but pass the args.
+    
+    local_ip = get_local_ip()
+    port = 8765
+    
+    print("\n" + "="*50)
+    print(" AUDIO LINK SERVER STARTED")
+    print("="*50)
+    print(f" Connect your phone to WiFi and enter this IP:")
+    print(f"\n      {local_ip}\n")
+    print(f" Port: {port}")
+    print("="*50 + "\n")
     
     server = AudioServer(use_opus=not args.pcm)
     try:
@@ -204,7 +231,7 @@ if __name__ == "__main__":
         numdevices = info.get('deviceCount')
         logger.info(f"Found {numdevices} audio devices. Using default output.")
         
-        asyncio.run(server.start_server())
+        asyncio.run(server.start_server(host="0.0.0.0", port=port))
     except KeyboardInterrupt:
         logger.info("Server stopping...")
         server.stop_audio_stream()
