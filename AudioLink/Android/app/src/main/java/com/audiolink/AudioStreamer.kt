@@ -17,7 +17,8 @@ import java.nio.ByteOrder
 class AudioStreamer(private val useOpus: Boolean = false) {  // Default to PCM mode
 
     private var audioRecord: AudioRecord? = null
-    private var isStreaming = false
+    @Volatile var isStreaming = false
+        private set
     private var webSocket: WebSocket? = null
     
     // Optimized OkHttp client for WiFi 5GHz low latency
@@ -84,6 +85,17 @@ class AudioStreamer(private val useOpus: Boolean = false) {  // Default to PCM m
         })
     }
 
+    private var volume = 1.0f
+    private var isMuted = false
+
+    fun setVolume(vol: Float) {
+        volume = vol.coerceIn(0f, 1f)
+    }
+
+    fun setMute(mute: Boolean) {
+        isMuted = mute
+    }
+
     private fun startAudioCapture() {
         if (isStreaming) return
         try {
@@ -109,6 +121,16 @@ class AudioStreamer(private val useOpus: Boolean = false) {  // Default to PCM m
                 while (isStreaming) {
                     val read = audioRecord?.read(pcmBuffer, 0, frameSize) ?: 0
                     if (read > 0) {
+                        // Apply Volume and Mute
+                        if (isMuted) {
+                            pcmBuffer.fill(0)
+                        } else if (volume != 1.0f) {
+                            for (i in pcmBuffer.indices) {
+                                val sample = (pcmBuffer[i] * volume).toInt()
+                                pcmBuffer[i] = sample.coerceIn(Short.MIN_VALUE.toInt(), Short.MAX_VALUE.toInt()).toShort()
+                            }
+                        }
+
                         // Send raw PCM (convert short[] to byte[])
                         val pcmBytes = shortArrayToByteArray(pcmBuffer)
                         webSocket?.send(pcmBytes.toByteString())

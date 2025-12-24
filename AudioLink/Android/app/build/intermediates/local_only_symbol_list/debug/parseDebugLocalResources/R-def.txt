@@ -8,7 +8,9 @@ color teal_200
 color teal_700
 color white
 id btnConnect
+id btnMute
 id etIpAddress
+id sbVolume
 id tvStatus
 layout activity_main
 mipmap ic_launcher

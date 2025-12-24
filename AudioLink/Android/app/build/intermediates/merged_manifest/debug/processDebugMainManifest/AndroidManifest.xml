@@ -43,6 +43,12 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name="com.audiolink.AudioService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="com.audiolink.androidx-startup"

@@ -3083,6 +3083,7 @@ id blocking
 id bottom
 id bounce
 id btnConnect
+id btnMute
 id buttonPanel
 id cancel_button
 id center
@@ -3330,6 +3331,7 @@ id row_index_key
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
+id sbVolume
 id scale
 id screen
 id scroll

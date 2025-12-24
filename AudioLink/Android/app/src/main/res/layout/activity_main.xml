@@ -34,6 +34,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Status: Disconnected"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:layout_marginBottom="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volume: "/>
+
+        <SeekBar
+            android:id="@+id/sbVolume"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="100"
+            android:progress="100"/>
+    </LinearLayout>
+
+    <ToggleButton
+        android:id="@+id/btnMute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mute"
+        android:textOn="Unmute"
+        android:textOff="Mute"/>
 
 </LinearLayout>

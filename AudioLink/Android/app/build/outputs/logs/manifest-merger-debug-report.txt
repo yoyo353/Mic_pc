@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:2:1-33:12
+ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:2:1-40:12
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Rodrigo\.gradle\caches\8.12\transforms\87eed13d31be6d1ae00e38dda75b6ac8\transformed\material-1.11.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\Rodrigo\.gradle\caches\8.12\transforms\3c19c9213d1c9c6c4ea1575df0cc3683\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\Rodrigo\.gradle\caches\8.12\transforms\701e9b193cb1b0c9dfde4e9ca10dacf7\transformed\constraintlayout-2.0.1\AndroidManifest.xml:2:1-11:12
@@ -72,8 +72,8 @@ ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\Androi
 	android:name
 		ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:9:22-85
 application
-ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:11:5-31:19
-INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:11:5-31:19
+ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:11:5-38:19
+INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:11:5-38:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Rodrigo\.gradle\caches\8.12\transforms\87eed13d31be6d1ae00e38dda75b6ac8\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Rodrigo\.gradle\caches\8.12\transforms\87eed13d31be6d1ae00e38dda75b6ac8\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\Rodrigo\.gradle\caches\8.12\transforms\701e9b193cb1b0c9dfde4e9ca10dacf7\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
@@ -130,6 +130,16 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:28:17-77
 	android:name
 		ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:28:27-74
+service#com.audiolink.AudioService
+ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:32:9-36:58
+	android:enabled
+		ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:34:13-35
+	android:exported
+		ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:35:13-37
+	android:foregroundServiceType
+		ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:36:13-55
+	android:name
+		ADDED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml:33:13-41
 uses-sdk
 INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Rodrigo\Desktop\Mic_pc\AudioLink\Android\app\src\main\AndroidManifest.xml
