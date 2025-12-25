@@ -5,6 +5,8 @@ echo.
 
 :start
 :: Run in PCM mode by default to avoid dependency issues
+:: The server now automatically picks the best WASAPI device for Discord compatibility.
+:: If you need to debug devices, run: python server.py --list-devices
 python server.py --pcm
 
 if %ERRORLEVEL% NEQ 0 (
