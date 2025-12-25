@@ -1,0 +1,296 @@
+Total Device Count (Global): 42
+------------------------------------------------------------
+Index: 0
+  Name: Asignador de sonido Microsoft - Input
+  HostAPI: 0 (MME)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 1
+  Name: CABLE Output (VB-Audio Virtual 
+  HostAPI: 0 (MME)
+  MaxInputChannels: 16
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 2
+  Name: MicrÃ³fono (WO Mic Device)
+  HostAPI: 0 (MME)
+  MaxInputChannels: 1
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 3
+  Name: Virtual Mic (Virtual Mic for Au
+  HostAPI: 0 (MME)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 4
+  Name: Mezcla estÃ©reo (Realtek(R) Audi
+  HostAPI: 0 (MME)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 5
+  Name: Asignador de sonido Microsoft - Output
+  HostAPI: 0 (MME)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 6
+  Name: 3 - SAMSUNG (3- AMD High Defini
+  HostAPI: 0 (MME)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 7
+  Name: Altavoces (Realtek(R) Audio)
+  HostAPI: 0 (MME)
+  MaxInputChannels: 0
+  MaxOutputChannels: 8
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 8
+  Name: CABLE Input (VB-Audio Virtual C
+  HostAPI: 0 (MME)
+  MaxInputChannels: 0
+  MaxOutputChannels: 16
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 9
+  Name: CABLE In 16ch (VB-Audio Virtual
+  HostAPI: 0 (MME)
+  MaxInputChannels: 0
+  MaxOutputChannels: 16
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 10
+  Name: Virtual Speakers (Virtual Speak
+  HostAPI: 0 (MME)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 11
+  Name: Controlador primario de captura de sonido
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 12
+  Name: CABLE Output (VB-Audio Virtual Cable)
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 16
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 13
+  Name: MicrÃ³fono (WO Mic Device)
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 1
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 14
+  Name: Virtual Mic (Virtual Mic for AudioRelay)
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 15
+  Name: Mezcla estÃ©reo (Realtek(R) Audio)
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 16
+  Name: Controlador primario de sonido
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 17
+  Name: 3 - SAMSUNG (3- AMD High Definition Audio Device)
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 18
+  Name: Altavoces (Realtek(R) Audio)
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 0
+  MaxOutputChannels: 8
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 19
+  Name: CABLE Input (VB-Audio Virtual Cable)
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 0
+  MaxOutputChannels: 16
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 20
+  Name: CABLE In 16ch (VB-Audio Virtual Cable)
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 0
+  MaxOutputChannels: 16
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 21
+  Name: Virtual Speakers (Virtual Speakers for AudioRelay)
+  HostAPI: 1 (Windows DirectSound)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 22
+  Name: 3 - SAMSUNG (3- AMD High Definition Audio Device)
+  HostAPI: 2 (Windows WASAPI)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 23
+  Name: Altavoces (Realtek(R) Audio)
+  HostAPI: 2 (Windows WASAPI)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 24
+  Name: CABLE Input (VB-Audio Virtual Cable)
+  HostAPI: 2 (Windows WASAPI)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 25
+  Name: CABLE In 16ch (VB-Audio Virtual Cable)
+  HostAPI: 2 (Windows WASAPI)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 26
+  Name: Virtual Speakers (Virtual Speakers for AudioRelay)
+  HostAPI: 2 (Windows WASAPI)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 27
+  Name: CABLE Output (VB-Audio Virtual Cable)
+  HostAPI: 2 (Windows WASAPI)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 28
+  Name: MicrÃ³fono (WO Mic Device)
+  HostAPI: 2 (Windows WASAPI)
+  MaxInputChannels: 1
+  MaxOutputChannels: 0
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 29
+  Name: Virtual Mic (Virtual Mic for AudioRelay)
+  HostAPI: 2 (Windows WASAPI)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 30
+  Name: Mezcla estÃ©reo (Realtek(R) Audio)
+  HostAPI: 2 (Windows WASAPI)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 31
+  Name: CABLE Output (VB-Audio Point)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 16
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 32
+  Name: Output (VB-Audio Point)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 0
+  MaxOutputChannels: 16
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 33
+  Name: Input (VB-Audio Point)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 16
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 34
+  Name: LÃ­nea de entrada (Realtek HD Audio Line input)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 35
+  Name: Speakers (Realtek HD Audio output)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 0
+  MaxOutputChannels: 8
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 36
+  Name: MicrÃ³fono (Realtek HD Audio Mic input)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 37
+  Name: Mezcla estÃ©reo (Realtek HD Audio Stereo input)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 38
+  Name: Virtual Mic (AudioRelay Wave)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 2
+  MaxOutputChannels: 0
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 39
+  Name: Line Out (AudioRelay Wave)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------
+Index: 40
+  Name: Microphone (WO Mic Wave)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 1
+  MaxOutputChannels: 0
+  DefaultSampleRate: 48000.0
+------------------------------------------------------------
+Index: 41
+  Name: Output (AMD HD Audio HDMI out #2)
+  HostAPI: 3 (Windows WDM-KS)
+  MaxInputChannels: 0
+  MaxOutputChannels: 2
+  DefaultSampleRate: 44100.0
+------------------------------------------------------------

@@ -57,6 +57,62 @@ class AudioServer:
         # Initialize Jitter Buffer
         self.jitter_buffer = JitterBuffer(target_buffer_ms=40, frame_duration_ms=20)
         self.playback_task = None
+        self.output_device_index = self._find_virtual_cable()
+
+    def _find_virtual_cable(self):
+        """Finds the index of VB-Audio Virtual Cable (CABLE Input)."""
+        count = self.p.get_device_count()
+        candidates = ["CABLE Input", "VB-Audio", "Virtual Audio Cable"]
+        found_devices = []
+
+        for i in range(count):
+            try:
+                info = self.p.get_device_info_by_index(i)
+                name = info.get("name", "")
+                if any(c in name for c in candidates) and info.get("maxOutputChannels") > 0:
+                    # found a candidate
+                    host_api_index = info.get("hostApi")
+                    try:
+                        host_api_info = self.p.get_host_api_info_by_index(host_api_index)
+                        host_api_name = host_api_info.get("name", "Unknown")
+                    except:
+                        host_api_name = "Unknown"
+                    
+                    found_devices.append({
+                        "index": i,
+                        "name": name,
+                        "host_api": host_api_name,
+                        "host_api_index": host_api_index
+                    })
+            except Exception:
+                continue
+        
+        if not found_devices:
+            logger.warning("Virtual Audio Cable NOT found! Using default speakers.")
+            logger.warning("CAUTION: This may cause an audio feedback loop if microphone is active.")
+            return None
+            
+        # Prioritize WASAPI
+        # WASAPI usually provides better latency and native 48kHz support which Discord prefers
+        best_device = None
+        for dev in found_devices:
+            if "WASAPI" in dev["host_api"]:
+                best_device = dev
+                break
+        
+        if not best_device:
+            # Fallback to MME or whatever was found first
+            best_device = found_devices[0]
+            
+        logger.info(f"Selected Audio Device: {best_device['name']}")
+        logger.info(f"  > Index: {best_device['index']}")
+        logger.info(f"  > API:   {best_device['host_api']}")
+        
+        if "WASAPI" not in best_device['host_api']:
+            logger.warning("NOTE: WASAPI driver not found for Virtual Cable.") 
+            logger.warning("If audio sounds bad in Discord, try installing VB-Cable correctly or check audio settings.")
+
+        return best_device['index']
 
     def start_audio_stream(self):
         """Initializes the PyAudio output stream."""
@@ -66,10 +122,19 @@ class AudioServer:
                 channels=CHANNELS,
                 rate=RATE,
                 output=True,
+                output_device_index=self.output_device_index,
                 frames_per_buffer=CHUNK,
                 stream_callback=self._audio_callback
             )
-            logger.info("Audio Output Stream Started (callback mode)")
+            device_name = "Default Output"
+            if self.output_device_index is not None:
+                try:
+                    info = self.p.get_device_info_by_index(self.output_device_index)
+                    device_name = info.get("name")
+                except:
+                    device_name = f"Index {self.output_device_index}"
+            
+            logger.info(f"Audio Output Stream Started on: {device_name}")
         except Exception as e:
             logger.error(f"Failed to start audio stream: {e}")
             sys.exit(1)
@@ -208,8 +273,27 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='AudioLink Server')
     parser.add_argument('--pcm', action='store_true', help='Use PCM mode instead of Opus')
+    parser.add_argument('--list-devices', action='store_true', help='List all available audio output devices and exit')
+    parser.add_argument('--device', type=int, help='Manually select audio device index')
     args = parser.parse_args()
     
+    if args.list_devices:
+        p = pyaudio.PyAudio()
+        print("\nAvailable Audio Output Devices:")
+        print(f"{'Index':<6} {'API':<20} {'Name'}")
+        print("-" * 60)
+        for i in range(p.get_device_count()):
+            try:
+                info = p.get_device_info_by_index(i)
+                if info.get('maxOutputChannels') > 0:
+                    host_api = p.get_host_api_info_by_index(info.get('hostApi')).get('name')
+                    print(f"{i:<6} {host_api:<20} {info.get('name')}")
+            except:
+                pass
+        print("-" * 60)
+        p.terminate()
+        sys.exit(0)
+
     # Force PCM mode if Opus is missing, but allow override if user installed it manually?
     # Actually, let's stick to the existing logic but pass the args.
     
@@ -225,11 +309,16 @@ if __name__ == "__main__":
     print("="*50 + "\n")
     
     server = AudioServer(use_opus=not args.pcm)
+    
+    # Manual device override
+    if args.device is not None:
+        server.output_device_index = args.device
+        logger.info(f"Manually selected output device index: {args.device}")
+
     try:
         # Check for PyAudio devices
         info = server.p.get_host_api_info_by_index(0)
         numdevices = info.get('deviceCount')
-        logger.info(f"Found {numdevices} audio devices. Using default output.")
         
         asyncio.run(server.start_server(host="0.0.0.0", port=port))
     except KeyboardInterrupt:
